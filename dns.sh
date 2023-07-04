@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cat > "/root/$1/config/dns.json" << EOF
+cat > "./config/dns.json" << EOF
 {
   "servers": [
     "1.1.1.1",
@@ -14,4 +14,4 @@ cat > "/root/$1/config/dns.json" << EOF
   "tag": "dns_inbound"
 }
 EOF
-sed -i 's/DnsConfigPath:/DnsConfigPath: \/etc\/XrayR\/dns.json #/g' /root/$1/config/config.yml  cd ~/$1 && docker compose down && docker compose up -d  && cd ~
+sed -i 's/DnsConfigPath:/DnsConfigPath: \/etc\/XrayR\/dns.json #/g' ./config/config.yml  && docker compose down && docker compose up -d  && cd ~
