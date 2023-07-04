@@ -6,7 +6,7 @@ cat > "./config/dns.json" << EOF
     "1.1.1.1",
     "8.8.8.8",
     {
-      "address": "$2",
+      "address": "$1",
       "port": 53,
       "domains": ["geosite:netflix","geosite:bahamut","geosite:hulu","geosite:hbo","geosite:disney","geosite:bbc","geosite:4chan","geosite:fox","geosite:abema","geosite:dmm","geosite:niconico""geosite:viu"]
     }
