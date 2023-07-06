@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 check_sys() {
   if [[ -f /etc/redhat-release ]]; then
     release="centos"
