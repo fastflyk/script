@@ -199,7 +199,7 @@ Nodes:
     ApiConfig:
       ApiHost: "https://www.fastestcloud.xyz"
       ApiKey: "d1525452-34a5-4763-a393-d645e2337677"
-      NodeID: $2
+      NodeID: $3
       NodeType: Trojan # Node type: V2ray, Shadowsocks, Trojan, Shadowsocks-Plugin
       Timeout: 30 # Timeout for the api request
       EnableVless: false # Enable Vless for V2ray Type
