@@ -14,4 +14,4 @@ cat > "./config/dns.json" << EOF
   "tag": "dns_inbound"
 }
 EOF
-sed -i 's/DnsConfigPath:/DnsConfigPath: \/etc\/XrayR\/dns.json #/g' ./config/config.yml  && docker compose down && docker compose up -d  && cd ~
+sed -i '/DnsConfigPath:/cDnsConfigPath: \/etc\/XrayR\/dns.json' ./config/config.yml  && docker compose down && docker compose up -d  && cd ~
