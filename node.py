@@ -126,6 +126,7 @@ def node(model, NodeID, domain, NodeType = 'Trojan'):
     print(os.path.join(PATH, model))
     model_path = os.path.join(PATH, model)
     if os.path.exists(model_path):
+        os.system('cd %s && docker compose down' % model_path)
         shutil.rmtree(model_path)
     shutil.copytree(node_path, model_path)
     config  = os.path.join(os.path.join(node_path, 'config'), 'config.yml')
