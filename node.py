@@ -137,6 +137,7 @@ def node(model, NodeID, domain, NodeType = 'Trojan'):
         model_config  = os.path.join(os.path.join(model_path, 'config'), 'config.yml')
         with open(model_config, 'w') as mf:
             mf.write(new_str)
+            os.system('cd %s && docker compose up -d' % model_path)
 
 
 
