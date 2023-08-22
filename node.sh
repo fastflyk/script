@@ -60,7 +60,7 @@ net.ipv4.tcp_congestion_control=bbr
 net.core.default_qdisc=fq_pie
 net.ipv4.ping_group_range=0 2147483647
 EOF
-sysctl -p &&
+sysctl -p 
 curl -o ~/node.py -L https://raw.githubusercontent.com/fastflyk/script/main/node.py &&
 cd ~ &&
 python3 node.py $1 $2 $3 $4
