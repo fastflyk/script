@@ -63,4 +63,4 @@ EOF
 sysctl -p 
 curl -o ~/node.py -L https://raw.githubusercontent.com/fastflyk/script/main/node.py &&
 cd ~ &&
-python3 node.py $1 $2 $3 $4
+python3 node.py $1 $2 $3 $4 $5
