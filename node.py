@@ -103,4 +103,4 @@ def get_info(model):
 
 
 if __name__ == "__main__":
-    node(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    node(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
