@@ -43,7 +43,7 @@ def install_docker():
 # domain
 # email
 # cfApiKey
-def node(model, NodeID, domain, NodeType = 'Trojan'):
+def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
     node_path = os.path.join(PATH, 'node')
     if (not os.path.exists(node_path) or os.path.isfile(node_path)):
         install_docker()
@@ -65,7 +65,7 @@ def node(model, NodeID, domain, NodeType = 'Trojan'):
         str  = file.read()
         info = get_info(model)
         print(info)
-        new_str = str.format(ApiHost = info['ApiHost'],ApiKey = info['ApiKey'],NodeID = NodeID,NodeType = NodeType,domain = domain,email = info['email'],cfApiKey = info['cfApiKey'])
+        new_str = str.format(ApiHost = info['ApiHost'],ApiKey = info['ApiKey'],NodeID = NodeID,NodeType = NodeType,domain = domain,email = info['email'],cfApiKey = info['cfApiKey'], certMode = certMode)
         model_config  = os.path.join(os.path.join(model_path, 'config'), 'config.yml')
         with open(model_config, 'w') as mf:
             mf.write(new_str)
