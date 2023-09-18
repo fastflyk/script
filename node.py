@@ -52,6 +52,11 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         docker pull ghcr.io/xrayr-project/xrayr:latest && apt install git && git clone https://github.com/fastflyk/node.git %s
         '''
         os.system(shell % node_path)
+    else:
+        shell = '''
+            cd %s && git pull origin main
+        '''
+        os.system(shell % node_path)
     # 复制文件
     print(node_path)
     print(os.path.join(PATH, model))
