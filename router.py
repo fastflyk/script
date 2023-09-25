@@ -147,11 +147,15 @@ def dns(model, ip):
     render(model, tpl, DEFAULT_ROUTER, DEFAULT_OUT)
 
 
-def router(model, ip, port, user, password, domain):
+def router(model, ip, port, user, password, type):
+    domain = DOMAIN
+    if type == 'gpt':
+        domain = GPT_DOMAIN
+
     router_tpl = '''
     {
       "type": "field",
-      "outboundTag": "nf",
+      "outboundTag": "%s",
       "domain": [
         %s
       ]
@@ -159,7 +163,7 @@ def router(model, ip, port, user, password, domain):
     '''
     out_tpl ='''
     {
-        "tag": "nf",
+        "tag": "%s",
         "protocol": "socks",
         "settings": {
             "servers": [
@@ -189,17 +193,14 @@ def router(model, ip, port, user, password, domain):
         out_str = f.read()
 
     router =  json.loads(router_str)
-    router['rules'].append(json.loads(router_tpl % domain))
+    router['rules'].append(json.loads(router_tpl % (type, domain)))
 
     out = json.loads(out_str)
-    out.append(json.loads(out_tpl % (ip, port, user, password)))
+    out.append(json.loads(out_tpl % (type, ip, port, user, password)))
 
-    render(model, DEFAULT_DNS, json.dumps(router).replace(' ', '').replace('\n', ''), json.dumps(out).replace('\n', ''))
+    render(model, DEFAULT_DNS, json.dumps(router), json.dumps(out))
 
 
 
 if __name__ == "__main__":
-    domain = DOMAIN
-    if sys.argv[6] == 'gpt':
-        domain = GPT_DOMAIN
-    router(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], domain)
+    router(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
