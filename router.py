@@ -6,11 +6,11 @@ import sys
 
 PATH = "/opt"
 
-O_CONFIG = "/config/custom_outbound.json"
+O_CONFIG = "config/custom_outbound.json"
 
-R_CONFIG = "/config/route.json"
+R_CONFIG = "config/route.json"
 
-D_CONFIG = "/config/dns.json"
+D_CONFIG = "config/dns.json"
 
 
 DEFAULT_DNS = '''
@@ -186,7 +186,7 @@ def router(model, ip, port, user, password, domain):
     # OUT
     out_str = DEFAULT_OUT
     with open(os.path.join(model_path, O_CONFIG), 'r') as f:
-        out_str = f.write(out)
+        out_str = f.read()
 
     router =  json.loads(router_str)
     router['rules'].append(router_tpl % domain)
