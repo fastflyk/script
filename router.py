@@ -142,7 +142,7 @@ def dns(model, ip):
     },
     ''' % ip, DOMAIN
     dns = json.loads(DEFAULT_DNS)
-    dns['servers'].append(tpl)
+    dns['servers'].append(json.loads(tpl))
 
     render(model, tpl, DEFAULT_ROUTER, DEFAULT_OUT)
 
@@ -189,12 +189,12 @@ def router(model, ip, port, user, password, domain):
         out_str = f.read()
 
     router =  json.loads(router_str)
-    router['rules'].append(router_tpl % domain)
+    router['rules'].append(json.loads(router_tpl % domain))
 
     out = json.loads(out_str)
-    out.append(out_tpl % (ip, port, user, password))
+    out.append(json.loads(out_tpl % (ip, port, user, password)))
 
-    render(model, DEFAULT_DNS, json.dumps(router).replace('\n', ''), json.dumps(out).replace('\n', ''))
+    render(model, DEFAULT_DNS, json.dumps(router).replace(' ', '').replace('\n', ''), json.dumps(out).replace('\n', ''))
 
 
 
