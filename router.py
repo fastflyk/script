@@ -128,6 +128,8 @@ def render(model, dns, router, out):
     with open(os.path.join(model_path, O_CONFIG), 'w+') as f:
         f.write(out)
 
+    os.system('cd %s && docker compose down && docker compose up -d' % model_path)
+
 
 def clear(model):
     render(model, DEFAULT_DNS, DEFAULT_ROUTER, DEFAULT_OUT)
