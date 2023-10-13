@@ -112,7 +112,7 @@ DOMAIN = '''
 '''
 
 GPT_DOMAIN = '''
-"domain:openai","domain:ai.com"
+"geosite:openai","domain:ai.com"
 '''
 
 
