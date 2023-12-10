@@ -63,7 +63,7 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
     '''
     ishell = ishell_tpl % (model_path, model, model, model, model, model)
     os.system(ishell)
-    os.system("sed -i 's/\/etc\/XrayR/\/opt\/%s\/config' ./config/config.yml" %s model)
+    os.system("sed -i 's/\/etc\/XrayR/\/opt\/%s\/config' ./config/config.yml" % model)
 
 
     # 添加依赖
