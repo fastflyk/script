@@ -58,7 +58,7 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         [Install]
         WantedBy=multi-user.target
     '''
-    ishell = ishell_tpl % (model_path, model, model, model, model, model)
+    ishell = ishell_tpl % (model, model, model, model)
     service  = os.path.join(node_path, '%s.service' % model)
     with open(service, 'w', encoding = 'utf-8') as f:
         f.write(ishell)
