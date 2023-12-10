@@ -128,7 +128,7 @@ def render(model, dns, router, out):
     with open(os.path.join(model_path, O_CONFIG), 'w+') as f:
         f.write(out)
 
-    os.system('systemctl restart %s ' model)
+    os.system('systemctl restart %s ' % model)
 
 
 def clear(model):
