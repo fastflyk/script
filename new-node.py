@@ -60,17 +60,10 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         [Install]
         WantedBy=multi-user.target
         EOF
-
-        sed -i 's/\/etc\/XrayR/\/opt\/%s\/config' ./config/config.yml
-        mv ./XrayR ./%s
-        systemctl daemon-reload
-        systemctl stop %s
-        systemctl enable %s
-        systemctl start %s
     '''
-    ishell = ishell_tpl % (model_path, model, model, model, model, model, model, model, model, model, model)
+    ishell = ishell_tpl % (model_path, model, model, model, model, model)
     os.system(ishell)
-
+    os.system("sed -i 's/\/etc\/XrayR/\/opt\/%s\/config' ./config/config.yml" %s model)
 
 
     # 添加依赖
@@ -83,7 +76,17 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         model_config  = os.path.join(os.path.join(model_path, 'config'), 'config.yml')
         with open(model_config, 'w') as mf:
             mf.write(new_str)
-            os.system('cd %s && docker compose up -d' % model_path)
+            sshell = '''
+                cd %s
+                mv ./XrayR ./%s
+                cp ./%s.service /etc/systemd/system/%s.service
+                systemctl daemon-reload
+                systemctl enable %s
+                systemctl start %s
+                sleep 2
+                systemctl status %s
+            '''
+            os.system(sshell % (model_path, model, model, model, model, model, model))
 
 
 
