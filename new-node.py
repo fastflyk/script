@@ -59,7 +59,7 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         WantedBy=multi-user.target
     '''
     ishell = ishell_tpl % (model, model, model, model)
-    service  = os.path.join(node_path, '%s.service' % model)
+    service  = os.path.join(model_path, '%s.service' % model)
     with open(service, 'w', encoding = 'utf-8') as f:
         f.write(ishell)
 
@@ -74,18 +74,20 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         model_config  = os.path.join(os.path.join(model_path, 'config'), 'config.yml')
         with open(model_config, 'w') as mf:
             mf.write(new_str)
-            os.system("sed -i 's/\/etc\/XrayR/\/opt\/%s\/config/g' ./config/config.yml" % model)
+            os.system("" % model)
             sshell = '''
-                cd %s
-                mv ./XrayR ./%s
-                cp ./%s.service /etc/systemd/system/%s.service
+                cd %s &&
+                sed -i 's/\/etc\/XrayR/\/opt\/%s\/config/g' ./config/config.yml &&
+                chmod +x ./XrayR &&
+                mv ./XrayR ./%s &&
+                cp ./%s.service /etc/systemd/system/%s.service &&
                 systemctl daemon-reload
                 systemctl enable %s
                 systemctl start %s
                 sleep 2
                 systemctl status %s
             '''
-            os.system(sshell % (model_path, model, model, model, model, model, model))
+            os.system(sshell % (model_path, model, model, model, model, model, model, model))
 
 
 
