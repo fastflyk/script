@@ -74,7 +74,6 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         model_config  = os.path.join(os.path.join(model_path, 'config'), 'config.yml')
         with open(model_config, 'w') as mf:
             mf.write(new_str)
-            os.system("" % model)
             sshell = '''
                 cd %s &&
                 sed -i 's/\/etc\/XrayR/\/opt\/%s\/config/g' ./config/config.yml &&
