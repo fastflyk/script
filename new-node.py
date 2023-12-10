@@ -37,8 +37,6 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         shutil.rmtree(model_path)
     shutil.copytree(node_path, model_path)
     ishell_tpl = '''
-        cd %s
-        cat > '%s.service' << EOF
         [Unit]
         Description=%s Service
         After=network.target nss-lookup.target
@@ -59,11 +57,11 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
 
         [Install]
         WantedBy=multi-user.target
-        EOF
     '''
     ishell = ishell_tpl % (model_path, model, model, model, model, model)
-    os.system(ishell)
-    os.system("sed -i 's/\/etc\/XrayR/\/opt\/%s\/config/g' ./config/config.yml" % model)
+    service  = os.path.join(node_path, '%s.service' % model)
+    with open(service, 'w', encoding = 'utf-8') as f:
+        f.write(ishell)
 
 
     # 添加依赖
@@ -76,6 +74,7 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         model_config  = os.path.join(os.path.join(model_path, 'config'), 'config.yml')
         with open(model_config, 'w') as mf:
             mf.write(new_str)
+            os.system("sed -i 's/\/etc\/XrayR/\/opt\/%s\/config/g' ./config/config.yml" % model)
             sshell = '''
                 cd %s
                 mv ./XrayR ./%s
