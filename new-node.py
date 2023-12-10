@@ -86,7 +86,7 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
                 sleep 2
                 systemctl status %s
             '''
-            print(sshell)
+
             os.system(sshell % (model_path, model, model, model, model, model, model))
 
 
