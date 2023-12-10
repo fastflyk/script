@@ -70,7 +70,7 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         str  = file.read()
         info = get_info(model)
         print(info)
-        configPath = os.path.join(model_config, 'config')
+        configPath = os.path.join(model_path, 'config')
         new_str = str.format(ApiHost = info['ApiHost'],ApiKey = info['ApiKey'],NodeID = NodeID,NodeType = NodeType,domain = domain,email = info['email'],cfApiKey = info['cfApiKey'], certMode = certMode, configPath = configPath)
         model_config  = os.path.join(os.path.join(model_path, 'config'), 'config.yml')
         with open(model_config, 'w') as mf:
