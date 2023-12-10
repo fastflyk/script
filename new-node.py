@@ -80,14 +80,14 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
                 chmod +x ./XrayR &&
                 mv ./XrayR ./%s &&
                 cp ./%s.service /etc/systemd/system/%s.service &&
-                systemctl daemon-reload
-                systemctl enable %s
-                systemctl start %s
-                sleep 2
+                systemctl daemon-reload &&
+                systemctl enable %s &&
+                systemctl start %s &&
+                systemctl restart %s &&
                 systemctl status %s
             '''
 
-            os.system(sshell % (model_path, model, model, model, model, model, model))
+            os.system(sshell % (model_path, model, model, model, model, model, model, model))
 
 
 
