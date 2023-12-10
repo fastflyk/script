@@ -70,13 +70,12 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         str  = file.read()
         info = get_info(model)
         print(info)
-        new_str = str.format(ApiHost = info['ApiHost'],ApiKey = info['ApiKey'],NodeID = NodeID,NodeType = NodeType,domain = domain,email = info['email'],cfApiKey = info['cfApiKey'], certMode = certMode)
+        new_str = str.format(ApiHost = info['ApiHost'],ApiKey = info['ApiKey'],NodeID = NodeID,NodeType = NodeType,domain = domain,email = info['email'],cfApiKey = info['cfApiKey'], certMode = certMode, configPath = model_path)
         model_config  = os.path.join(os.path.join(model_path, 'config'), 'config.yml')
         with open(model_config, 'w') as mf:
             mf.write(new_str)
             sshell = '''
                 cd %s &&
-                sed -i 's/\/etc\/XrayR/\/opt\/%s\/config/g' ./config/config.yml &&
                 chmod +x ./XrayR &&
                 mv ./XrayR ./%s &&
                 cp ./%s.service /etc/systemd/system/%s.service &&
@@ -86,7 +85,8 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
                 sleep 2
                 systemctl status %s
             '''
-            os.system(sshell % (model_path, model, model, model, model, model, model, model))
+            print(sshell)
+            os.system(sshell % (model_path, model, model, model, model, model, model))
 
 
 
