@@ -37,26 +37,26 @@ def node(model, NodeID, domain, NodeType = 'Trojan', certMode = 'dns'):
         shutil.rmtree(model_path)
     shutil.copytree(node_path, model_path)
     ishell_tpl = '''
-        [Unit]
-        Description=%s Service
-        After=network.target nss-lookup.target
-        Wants=network.target
+[Unit]
+Description=%s Service
+After=network.target nss-lookup.target
+Wants=network.target
 
-        [Service]
-        User=root
-        Group=root
-        Type=simple
-        LimitAS=infinity
-        LimitRSS=infinity
-        LimitCORE=infinity
-        LimitNOFILE=999999
-        WorkingDirectory=/opt/%s
-        ExecStart=/opt/%s/%s --config /opt/%s/config/config.yml
-        Restart=on-failure
-        RestartSec=10
+[Service]
+User=root
+Group=root
+Type=simple
+LimitAS=infinity
+LimitRSS=infinity
+LimitCORE=infinity
+LimitNOFILE=999999
+WorkingDirectory=/opt/%s
+ExecStart=/opt/%s/%s --config /opt/%s/config/config.yml
+Restart=on-failure
+RestartSec=10
 
-        [Install]
-        WantedBy=multi-user.target
+[Install]
+WantedBy=multi-user.target
     '''
     ishell = ishell_tpl % (model, model, model, model, model)
     service  = os.path.join(model_path, '%s.service' % model)
